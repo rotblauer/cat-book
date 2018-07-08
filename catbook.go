@@ -1,14 +1,14 @@
 package main
 
 import (
+	"flag"
 	"net/http"
 	"strconv"
-	"flag"
 )
 
 func main() {
 	var porty int
-	flag.IntVar(&porty, "port", 8080, "port to serve and protect")
+	flag.IntVar(&porty, "port", 3000, "port to serve and protect")
 
 	if bolterr := InitBoltDB(); bolterr == nil {
 		defer GetDB().Close()

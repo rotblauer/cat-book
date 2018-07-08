@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"image"
-	"net/http"
 	"github.com/gorilla/mux"
+	"net/http"
 )
+
 type Route struct {
 	Name        string
 	Method      string
@@ -15,32 +15,44 @@ type Route struct {
 
 type Routes []Route
 
-
 var routes = Routes{Route{
 	"CatStore",
-	"Post",
-	"/",
+	"POST",
+	"/CatStore",
+	catPic,
+}, Route{
+	"CatPic",
+	"GET",
+	"/{db}/{z}/{x}/{y}",
 	catPic,
 },
 }
 
-func catPic(w http.ResponseWriter, r *http.Request) {
-	var catPic image.Image
+func getCatPics(w http.ResponseWriter, r *http.Request) {
+	//TODO
+}
 
+// store a cat pic to db
+// TODO geograph awares with trackpoint mapping
+func catPic(w http.ResponseWriter, r *http.Request) {
+	var cat CatPic
+	println(r.Body)
 	if r.Body == nil {
 		http.Error(w, "Please send a request body", 500)
 		return
 	}
-	err := json.NewDecoder(r.Body).Decode(&catPic)
+	err := json.NewDecoder(r.Body).Decode(&cat)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
 	}
 
+	storeCat(cat)
+
 }
 
 func CatRouter() *mux.Router {
-
+	println("got router")
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		var handler http.Handler
@@ -52,6 +64,8 @@ func CatRouter() *mux.Router {
 			Path(route.Pattern).
 			Name(route.Name).
 			Handler(handler)
+		println("got route")
+
 	}
 
 	return router
