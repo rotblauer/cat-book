@@ -28,6 +28,13 @@ var routes = Routes{Route{
 },
 }
 
+/// smorganizing
+
+// get cat image + trackerpt
+// store image in db, or on hd with https://github.com/deiwin/imstor and db manages trackpoint -> file mapper,
+
+/// imstor nice since can do small/large/original auto pics
+
 func getCatPics(w http.ResponseWriter, r *http.Request) {
 	//TODO
 }
