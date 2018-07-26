@@ -8,5 +8,6 @@ kill $(ps aux | grep catbook | awk '{print $2}') # kill trackermain
 
 pushd $HOME/sland.rotblauer.com;
 ./catbook -config config.json >> $HOME/track.areteh.co/logs.log 2>&1 &
+
 popd;
 
