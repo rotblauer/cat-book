@@ -1,0 +1,6 @@
+{
+	"bilder-dir": "tmp",
+	"access-log": "access.log",
+	"reload-delay-seconds": 2,
+	"addr": ":8111"
+}
