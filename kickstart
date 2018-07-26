@@ -4,10 +4,11 @@
 
 echo "killing running trackermain process... "
 echo "(will fail to kill ps proc)"
-kill $(ps aux | grep catbook | awk '{print $2}') # kill trackermain
+proc=linux.catbook
+kill $(ps aux | grep $proc | awk '{print $2}') # kill trackermain
 
 pushd $HOME/sland.rotblauer.com;
-./catbook -config config.json >> $HOME/track.areteh.co/logs.log 2>&1 &
+./$proc -config config.json >> $HOME/sland.rotblauer.com/logs.log 2>&1 &
 
 popd;
 
